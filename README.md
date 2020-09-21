@@ -132,7 +132,8 @@
                     // nums[i]为（当前见过的）最小元素，没有上一个元素，prev[i]=-1
                     prev[i] = -1;
                 } else {
-                    // 将tails[insertPos]更新为nums[i]，nums[i]前一个元素为tails[insertPos-1]，其位置为tailPositions[insertPos-1]
+                    // 将tails[insertPos]更新为nums[i]，nums[i]前一个元素为tails[insertPos-1]，
+                    // 其位置为tailPositions[insertPos-1]
                     prev[i] = tailPositions.get(insertPos - 1);
                 }
                 // tails[insertPos]已更新为nums[i]，相应地更新tailPositions[insertPos]=i
