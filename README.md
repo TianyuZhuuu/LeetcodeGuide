@@ -58,7 +58,7 @@
   - 有时候题目要求我们输出真正的最长上升子序列，而不仅仅是其长度。这里给出上述两种算法找对应最长子序列的实现，注意我们找到的最长上升子序列是字典序最小的，也即前面所说的最优子序列。主要是增加`prev`数组去追溯`nums[i]`前驱元素在原数组的位置，注释已经足够清晰，这里就不加赘述了。
   - 没有找到对应的题目进行测试，随机生成了长度10000的数组，检查返回的LIS长度是否与算法1/2一致，是否严格递增，测试通过。（最小字典序没有进行测试，也不清楚该怎么测试，我自己认为应该没有问题）。
   - <del>(2020/9/16 美团算法一面被考到，40分钟没写出来，理所当然挂了。怪自己平时不刨根问底，关键时刻掉链子，nlogn的方法都半天没写出来)</del>
-  - 补充：在牛课网上找到了[原题](https://www.nowcoder.com/questionTerminal/30fb9b3cab9742ecae9acda1c75bf927)。方法一因超时仅能通过4.76%（也是我面试时写出的答案），方法二能通过全部测试样例。
+  - 补充：在牛客网上找到了[原题](https://www.nowcoder.com/questionTerminal/30fb9b3cab9742ecae9acda1c75bf927)。方法一因超时仅能通过4.76%（也是我面试时写出的答案），方法二能通过全部测试样例。
 ```java
     public static int[] LIS1(int[] nums) {
         if (nums.length == 0) return new int[0];
@@ -172,6 +172,9 @@
 4. 当考虑完当前结点的所有未访问邻居结点后，将当前结点标记为已访问并将其从unvisited set中删除。访问过的节点将不再被检查。
 5. 如果目标节点被标记为已访问（计算两点间最短路径时），或者unvisited set中的结点中的最小暂定距离是无穷大（unvisited set中剩余点从源点不可达时发生），算法终止。
 6. 否则，选择unvisited set中暂定距离最小的结点，将其设置为新的当前节点，返回步骤3。
+
+- 给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](#https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
+  
 ```java
     public static int dijkstra(int[][] adj, int source, int target) {
         int n = adj.length;
