@@ -173,7 +173,7 @@
 5. 如果目标节点被标记为已访问（计算两点间最短路径时），或者unvisited set中的结点中的最小暂定距离是无穷大（unvisited set中剩余点从源点不可达时发生），算法终止。
 6. 否则，选择unvisited set中暂定距离最小的结点，将其设置为新的当前节点，返回步骤3。
 
-- 给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](#https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
+- 给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
   
 ```java
     public static int dijkstra(int[][] adj, int source, int target) {
