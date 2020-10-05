@@ -165,13 +165,11 @@
 - 确定起点终点的最短路径问题 - 即已知起点和终点，求两结点之间的最短路径。
 - 全局最短路径问题 - 求图中所有的最短路径。适合使用Floyd-Warshall算法。
 ### Dijkstra算法
-令`dist[u]`表示从源点到结点`u`的暂定最短距离。Dijkstra算法为`dist`数组分配一些初始值，并尝试逐步改善它们。
-1. 将所有结点标记为未访问。创建包含所有未访问结点的集合，称为unvisited set。
-2. 为每个结点分配一个暂定距离值：对于初始节点，将其设置为零；对于所有其他节点，将其设置为无穷大。将初始节点设置为当前节点。
-3. 对于当前结点，考虑其所有未访问的邻居结点`u`，并计算它们经过当前结点的暂定距离（即源点经过当前结点到u的距离）。将新计算的暂定距离与当前分配的值`dist[u]`进行比较，然后分配给`dist[u]`较小的值。 例如，如果当前节点A标记为6，并且将其与相邻节点B的边的长度为2，则通过A到B的距离将为6 + 2 = 8。 如果`dist[B]`距离大于8，则将其更改为8。否则，将保留当前值。
-4. 当考虑完当前结点的所有未访问邻居结点后，将当前结点标记为已访问并将其从unvisited set中删除。访问过的节点将不再被检查。
-5. 如果目标节点被标记为已访问（计算两点间最短路径时），或者unvisited set中的结点中的最小暂定距离是无穷大（unvisited set中剩余点从源点不可达时发生），算法终止。
-6. 否则，选择unvisited set中暂定距离最小的结点，将其设置为新的当前节点，返回步骤3。
+Dijkstra算法通过保留目前为止所找到的每个顶点`v \in V`从`s`到`v`的最短路径来工作的。初始时，原点s的路径权重被赋为0（即原点的实际最短路径=0）。同时把所有其他顶点的路径长度设为无穷大，即表示我们不知道任何通向这些顶点的路径。当算法结束时，`d[v]`中存储的便是从`s`到`v`的最短路径，或者如果路径不存在的话是无穷大。
+
+松弛操作是Dijkstra算法的基础操作：如果存在一条从`u`到`v`的边，那么从`s`到`v`的一条新路径是将边`w(u,v) \in E`添加到从`s`到`u`的路径尾部来拓展一条从`s`到`v`的路径。这条路径的长度是`d[u]+w(u,v)`。如果这个值比目前已知的`d[v]`的值要小，那么可以用这个值来替代当前`d[v]`中的值。松弛边的操作一直运行到所有的`d[v]`都代表从`s`到`v`的最短路径的长度值。
+
+算法维护两个顶点集合`S`和`Q`。集合`S`保留所有已知实际最短路径值的顶点，而集合`Q`则保留其他所有顶点。集合`S`初始状态为空，而后每一步都有一个顶点从`Q`移动到`S`。这个被选择的顶点是`Q`中拥有最小的`d[u]`值的顶点。当一个顶点`u`从`Q`中转移到了`S`中，算法对`u`的每条外接边`w(u,v)`进行松弛。
 
 - 给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
   
@@ -179,26 +177,30 @@
     public static int dijkstra(int[][] adj, int source, int target) {
         int n = adj.length;
         int INF = Integer.MAX_VALUE / 2;
-        boolean[] visited = new boolean[n];
-        int[] dist = new int[n];
-        Arrays.fill(dist, INF);
-        dist[source] = 0;
-        while (!visited[target]) {
+        HashSet<Integer> S = new HashSet<>();
+        HashSet<Integer> Q = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            Q.add(i);
+        }
+        int[] d = new int[n];
+        Arrays.fill(d, INF);
+        d[source] = 0;
+        while (S.size() < n) {
             int min_dist = INF;
             int current = -1;
-            for (int i = 0; i < n; i++) {
-                if (visited[i]) continue;
-                if (dist[i] < min_dist) {
+            for (int i : Q) {
+                if (d[i] < min_dist) {
                     current = i;
-                    min_dist = dist[i];
+                    min_dist = d[i];
                 }
             }
-            if (current == -1) return -1;
-            visited[current] = true;
+            if (current == -1) break;
+            S.add(current);
+            Q.remove(current);
             for (int i = 0; i < n; i++) {
-                dist[i] = Math.min(dist[i], dist[current] + adj[current][i]);
+                d[i] = Math.min(d[i], d[current] + adj[current][i]);
             }
         }
-        return dist[target] == INF ? -1 : dist[target];
+        return d[target] == INF ? -1 : d[target];
     }
 ```
