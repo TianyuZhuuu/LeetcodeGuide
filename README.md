@@ -171,7 +171,7 @@ Dijkstra算法通过保留目前为止所找到的每个顶点`v \in V`从`s`到
 
 算法维护两个顶点集合`S`和`Q`。集合`S`保留所有已知实际最短路径值的顶点，而集合`Q`则保留其他所有顶点。集合`S`初始状态为空，而后每一步都有一个顶点从`Q`移动到`S`。这个被选择的顶点是`Q`中拥有最小的`d[u]`值的顶点。当一个顶点`u`从`Q`中转移到了`S`中，算法对`u`的每条外接边`w(u,v)`进行松弛。
 
-- 给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
+给定包含`n`个结点，`m`条边的有向图`G`，图以邻接矩阵的形式存储。`adj`是`n*n`的矩阵，`adj[u][v]`存储从结点`u`到结点`v`的`cost`，若不存在从`u`到`v`的边则`adj[u][v]=INF`。实现时防止溢出，令`INF=Integer.MAX_VALUE/2`。若`source`到`target`可达返回最小距离，否则返回-1。在[牛客网](https://www.nowcoder.com/questionTerminal/b39dacd574ba49c7a4d10974b1bb325f?answerType=1&f=discussion)上已通过测试。
   
 ```java
     public static int dijkstra(int[][] adj, int source, int target) {
