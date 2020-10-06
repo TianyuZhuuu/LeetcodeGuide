@@ -207,3 +207,39 @@ Dijkstra算法通过保留目前为止所找到的每个顶点`v \in V`从`s`到
 ```
 ### Bellman-Ford算法
 Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估计的最短路径值渐渐地被更加准确的值替代，直至得到最优解。在两个算法中，计算时每个边之间的估计距离值都比真实值大，并且被新找到路径的最小长度替代。 然而，Dijkstra算法以贪心法选取未被处理的具有最小权值的节点，然后对其的出边进行松弛操作；而Bellman-Ford算法简单地对所有边进行松弛操作，共`|V|-1`次，其中`|V|`是图的结点的数量。在重复地计算中，已计算得到正确的距离的边的数量不断增加，直到所有边都计算得到了正确的路径。这样的策略使得Bellman-Ford算法比Dijkstra算法适用于更多种类的输入。
+
+由于不存在循环的最长路径可以包含`|V|-1`条边，因此必须扫描所有边`|V|-1`次，以确保找到所有结点的最短路径。对所有的边进行最终扫描，如果更新了任何距离，则找到一条长度为`|V|`条边的路径，该路径只能在图中存在至少一个负环时出现。
+
+在[牛客网](https://www.nowcoder.com/questionTerminal/5ed9a1ad23b64044ad546f55df7a7f6d?f=discussion)上已通过测试。
+
+```java
+    public static int[] bellmanFord(int n, int[][] edges, int source, int target) {
+        int INF = Integer.MAX_VALUE / 2;
+        int[] d = new int[n];
+        Arrays.fill(d, INF);
+        d[source] = 0;
+
+        // |V|-1 relaxation
+        for (int i = 0; i < edges.length - 1; i++) {
+            for (int[] edge : edges) {
+                int u = edge[0];
+                int v = edge[1];
+                int w = edge[2];
+                if (d[u] != INF && d[u] + w < d[v]) {
+                    d[v] = d[u] + w;
+                }
+            }
+        }
+
+        // Check for negative-weight circles
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+            if (d[u] != INF && d[u] + w < d[v]) {
+                return new int[]{-1, 1};
+            }
+        }
+        return new int[]{d[target], 0};
+    }
+```
