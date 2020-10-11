@@ -212,36 +212,35 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
 
 由于不存在循环的最长路径可以包含`|V|-1`条边，因此必须扫描所有边`|V|-1`次，以确保找到所有结点的最短路径。对所有的边进行最终扫描，如果更新了任何距离，则找到一条长度为`|V|`条边的路径，该路径只能在图中存在至少一个负环时出现。
 
-在[牛客网](https://www.nowcoder.com/questionTerminal/5ed9a1ad23b64044ad546f55df7a7f6d?f=discussion)上已通过测试。
+实现中返回`int[]`，第一位`0/1`存储图是否包含负权环，第二位存储从source到target的距离（如存在负权环则为1）。实现在[牛客网](https://www.nowcoder.com/questionTerminal/5ed9a1ad23b64044ad546f55df7a7f6d?f=discussion)上已通过测试。
 
 ```java
     public static int[] bellmanFord(int n, int[][] edges, int source, int target) {
         int INF = Integer.MAX_VALUE / 2;
-        int[] d = new int[n];
-        Arrays.fill(d, INF);
-        d[source] = 0;
-
+        // Initialize distance
+        int[] dist = new int[n];
+        Arrays.fill(dist, INF);
+        dist[source] = 0;
         // |V|-1 relaxation
-        for (int i = 0; i < edges.length - 1; i++) {
-            for (int[] edge : edges) {
-                int u = edge[0];
-                int v = edge[1];
-                int w = edge[2];
-                if (d[u] != INF && d[u] + w < d[v]) {
-                    d[v] = d[u] + w;
+        for (int t = 0; t < n - 1; t++) {
+            for (int[] e : edges) {
+                int u = e[0];
+                int v = e[1];
+                int w = e[2];
+                if (dist[u] != INF && dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
                 }
             }
         }
-
-        // Check for negative-weight circles
-        for (int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-            int w = edge[2];
-            if (d[u] != INF && d[u] + w < d[v]) {
-                return new int[]{-1, 1};
+        // Check for circle
+        for (int[] e : edges) {
+            int u = e[0];
+            int v = e[1];
+            int w = e[2];
+            if (dist[u] != INF && dist[u] + w < dist[v]) {
+                return new int[]{1, -1};
             }
         }
-        return new int[]{d[target], 0};
+        return new int[]{0, dist[target]};
     }
 ```
