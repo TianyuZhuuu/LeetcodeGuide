@@ -5,6 +5,7 @@
   - [最短路径](#最短路径)
     - [Dijkstra算法](#Dijkstra算法)
     - [Bellman-Ford算法](#Bellman-Ford算法)
+- [常用操作&模板](#常用操作&模板)
 
 <br/>
 
@@ -244,3 +245,6 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
         return new int[]{0, dist[target]};
     }
 ```
+
+# 模板&常用操作
+## HashSet Literal
