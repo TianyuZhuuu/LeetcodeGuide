@@ -5,7 +5,7 @@
   - [最短路径](#最短路径)
     - [Dijkstra算法](#Dijkstra算法)
     - [Bellman-Ford算法](#Bellman-Ford算法)
-- [常用操作\&模板](#常用操作\&模板)
+- [常用操作&模板](#常用操作&模板)
 
 <br/>
 
@@ -246,7 +246,7 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
     }
 ```
 
-# 模板\&常用操作
+# 常用操作&模板
 ## Collection Literals (集合字面值)
 java 9中加入了工厂方法，简化集合的创建：
 ```java
