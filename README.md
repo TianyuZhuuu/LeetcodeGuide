@@ -262,6 +262,6 @@ Map<String, String> map2 = Map.ofEntries(
 ```
 更老版本：
 ```java
-List<Character> vowelList = Arrays.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+List<Character> vowelList = Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
 Set<Character> vowelSet = new HashSet<>(vowelList);
 ```
