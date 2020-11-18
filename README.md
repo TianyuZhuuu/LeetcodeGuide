@@ -5,7 +5,8 @@
   - [最短路径](#最短路径)
     - [Dijkstra算法](#Dijkstra算法)
     - [Bellman-Ford算法](#Bellman-Ford算法)
-- [常用操作与模板](#常用操作与模板)
+- [常用操作](#常用操作)
+- [模板](#模板)
 
 <br/>
 
@@ -246,7 +247,7 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
     }
 ```
 
-# 常用操作与模板
+# 常用操作
 ## Collection Literals (集合字面值)
 java 9中加入了工厂方法，简化集合的创建：
 ```java
@@ -264,4 +265,26 @@ Map<String, String> map2 = Map.ofEntries(
 ```java
 List<Character> vowelList = Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
 Set<Character> vowelSet = new HashSet<>(vowelList);
+```
+
+# 模板
+## 双指针
+当需要把数组/字符串划分成符合条件的连续分组时使用。
+
+例题[Positions of Large Groups](https://leetcode.com/problems/positions-of-large-groups/)需要我们找到由一些连续的相同字符所构成的分组，记录较大分组(长度大于等于3)的开始结束位置。例如，在字符串 S = "abbxxxxzyy" 中，就含有 "a", "bb", "xxxx", "z" 和 "yy" 这样的一些分组。
+
+其他题目如[Most Common Word](https://leetcode.com/problems/most-common-word/)可以使用双指针对字符串进行切分得到单词，再进行后续处理。
+
+```java
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String s) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i=0, j=0; i<s.length(); i=j) {
+            // s.charAt(j)==s.charAt(i)视情况改为相应的条件
+            while (j<s.length()&&s.charAt(j)==s.charAt(i)) j++;
+            if (j-i>=3) res.add(Arrays.asList(i,j-1));
+        }
+        return res;
+    }
+}
 ```
