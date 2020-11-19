@@ -267,6 +267,17 @@ List<Character> vowelList = Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I'
 Set<Character> vowelSet = new HashSet<>(vowelList);
 ```
 
+## 重复字符串若干次
+重复字符串`abcd`3次，java 11以上：
+```java
+String repeated = "abcd".repeat(3);
+```
+
+java 10及更老版本需要使用正则替换：
+```java
+String repeated = new String(new char[3]).replace("\0", "abcd");
+```
+
 # 模板
 ## 双指针
 当需要把数组/字符串划分成符合条件的连续分组时使用。
