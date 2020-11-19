@@ -280,14 +280,14 @@ String repeated = new String(new char[3]).replace("\0", "abcd");
 
 ## Character类常用操作
 ```java
-Character.isLetterOrDigit(char) // 是否为字母或数字
-Character.isLetter(char)        // 是否为字母
-Character.isUpperCase(char)     // 是否为大写字母
-Character.isLowerCase(char)     // 是否为小写字母
-Character.isDigit(char)         // 是否为数字
+Character.isLetterOrDigit(ch) // 是否为字母或数字
+Character.isLetter(ch)        // 是否为字母
+Character.isUpperCase(ch)     // 是否为大写字母
+Character.isLowerCase(ch)     // 是否为小写字母
+Character.isDigit(ch)         // 是否为数字
 
-Character.toUpperCase(char)     // 转化为大写字母
-Character.toLowerCase(char)     // 转化为小写字母
+Character.toUpperCase(ch)     // 转化为大写字母
+Character.toLowerCase(ch)     // 转化为小写字母
 ```
 
 # 模板
