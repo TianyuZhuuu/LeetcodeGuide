@@ -278,6 +278,18 @@ java 10及更老版本需要使用正则替换：
 String repeated = new String(new char[3]).replace("\0", "abcd");
 ```
 
+## Character类常用操作
+```java
+Character.isLetterOrDigit(char) // 是否为字母或数字
+Character.isLetter(char)        // 是否为字母
+Character.isUpperCase(char)     // 是否为大写字母
+Character.isLowerCase(char)     // 是否为小写字母
+Character.isDigit(char)         // 是否为数字
+
+Character.toUpperCase(char)     // 转化为大写字母
+Character.toLowerCase(char)     // 转化为小写字母
+```
+
 # 模板
 ## 双指针
 当需要把数组/字符串划分成符合条件的连续分组时使用。
