@@ -278,6 +278,12 @@ java 10及更老版本需要使用正则替换：
 String repeated = new String(new char[3]).replace("\0", "abcd");
 ```
 
+## List转换为Array
+```java
+String[] strings = strlist.toArray(new String[0]);
+int[] ints = intlist.stream().mapToInt(i->i).toArray();
+```
+
 ## Character类常用操作
 ```java
 Character.isLetterOrDigit(ch) // 是否为字母或数字
