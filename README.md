@@ -251,7 +251,7 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
 ## Collection Literals (集合字面值)
 java 9中加入了工厂方法，简化集合的创建：
 ```java
-// 最多10个元素（Map中5个键值对）
+// 最多10个元素（Map中10个键值对）
 List<Character> vowelList = List.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
 Set<Character> vowelSet = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
 Map<String, String> map1 = Map.of("key1", "value1", "key2", "value2");
