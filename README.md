@@ -248,6 +248,11 @@ Bellman-Ford算法与Dijkstra算法类似，都以松弛操作为基础，即估
 ```
 
 # 常用操作
+## 二维数组初始化
+```java
+int[][] arr = {{1, 2, 3}, {4, 5, 6}};
+```
+
 ## Collection Literals (集合字面值)
 java 9中加入了工厂方法，简化集合的创建：
 ```java
@@ -294,6 +299,21 @@ Character.isDigit(ch)         // 是否为数字
 
 Character.toUpperCase(ch)     // 转化为大写字母
 Character.toLowerCase(ch)     // 转化为小写字母
+```
+
+## 基本类型数组作为HashSet/HashMap的Key
+基本类型的数组不能直接用作HashSet/HashMap的Key（hashcode不同，两个数组会被认为是不同的对象）。可以考虑使用`Arrays.toString(..)`方法把数组转化成字符串，再当做Key使用。
+```java
+int[] arr1 = {1, 2, 3};
+int[] arr2 = {1, 2, 3};
+
+HashSet<int[]> set1 = new HashSet<>();
+set1.add(arr1);
+System.out.println(set1.contains(arr2)); //false
+
+HashSet<String> set2 = new HashSet<>();
+set2.add(Arrays.toString(arr1));
+System.out.println(set2.contains(Arrays.toString(arr2))); //true
 ```
 
 # 模板
