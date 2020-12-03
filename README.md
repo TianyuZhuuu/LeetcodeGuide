@@ -1,4 +1,6 @@
 # 索引
+- [二分查找](#二分查找)
+- [快速排序](#快速排序)
 - [动态规划](#动态规划)
   - [最长递增子序列](#最长递增子序列)
 - [图算法](#图算法)
@@ -9,6 +11,48 @@
 - [模板](#模板)
 
 <br/>
+
+# 二分查找
+```java
+public int binarySearch(int[] nums, int target) {
+    int left = 0, right = nums.length;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] >= target) right = mid;
+        else left = mid + 1;
+    }
+    return left < nums.length && nums[left] == target ? left : -1;
+}
+```
+
+# 快速排序
+```java
+public void swap(int[] nums, int i, int j) {
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+}
+
+public void quickSort(int[] nums, int left, int right) {
+        if (right - left <= 1) return;
+        int pivot = partition(nums, left, right);
+        quickSort(nums, left, pivot);
+        quickSort(nums, pivot + 1, right);
+    }
+    
+public int partition(int[] nums, int left, int right) {
+    int pivot = nums[right - 1];
+    int i = left;
+    for (int j = left; j < right; j++) {
+        if (nums[j] < pivot) {
+            swap(nums, i, j);
+            i++;
+        }
+    }
+    swap(nums, i, right - 1);
+    return i;
+}
+```
 
 # 动态规划
 ## 最长递增子序列
