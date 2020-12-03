@@ -312,8 +312,14 @@ Map<String, String> map2 = Map.ofEntries(
 ```
 更老版本：
 ```java
-List<Character> vowelList = Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
-Set<Character> vowelSet = new HashSet<>(vowelList);
+String[] products = new String[]{"mobile","mouse","moneypot","monitor","mousepad"};
+List<String> candidates = Arrays.asList(products);
+```
+
+## 使用array初始化list
+```java
+int[] arr = new int[]{1, 2, 3};
+List<Integer> list = Arrays.asList(arr); 
 ```
 
 ## 重复字符串若干次
