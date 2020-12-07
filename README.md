@@ -43,7 +43,7 @@ public void quickSort(int[] nums, int left, int right) {
 public int partition(int[] nums, int left, int right) {
     int pivot = nums[right - 1];
     int i = left;
-    for (int j = left; j < right; j++) {
+    for (int j = left; j < right - 1; j++) {
         if (nums[j] < pivot) {
             swap(nums, i, j);
             i++;
